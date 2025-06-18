@@ -6,11 +6,12 @@ In this project I use Google Trends and Facebook's Prophet model to analyze and 
 - Non-toxic materials in Home & Garden > Kitchen & Dining
 - Healthy descripions in Food & Drink
 
-**Google Trends** allows users to visualize how often specific terms are entered into Google's search engine over time. It helps analyze public interest and identify emerging trends by plotting the relative popularity of search queries which can be filtered based on different categories, by regions and/or time periods. Users can compare up to five search terms in a single query, and the results are normalized on a relative scale from 0 to 100, where 100 represents the peak popularity of a term. Since each query is normalized independently, this means that comparisons accross different queries require careful interpretation.
+**Google Trends** allows users to visualize how often specific terms are entered into Google's search engine over time. It helps analyze public interest and identify emerging trends by plotting the relative popularity of search queries which can be filtered based on different categories, by regions and/or time periods. Users can compare up to five search terms in a single query, and the results are normalized on a relative scale from 0 to 100, where 100 represents the peak popularity of a term. 
 
-**Facebook Prophet** is an open-source forecasting model designed for time-series data. It works by decomposing time series as a sum of three components: trend, seasonability and holiday effects. The model fits piecewise linear or logistic trends, captures seasonal patterns using a Fourier series, and uses indicator functions for customizable holiday events causing spikes or dips. To evaluate forecasting accuracy, Prophet supports rolling forward cross-validation where the model is repeatedly trained on an expanding window of historical data and then used to foracast a fixed horizon into the future. This tool can be used to assess how forecast accuracy changes depending on how far the prediction is made i.e. the length of horizon interval.
 
-We first begin by plotting the data, we then use Prophet to fit the data and create a model to forecast one year into the future. The Google Trends data in this project spans the years 2010-2024. 
+**Facebook Prophet** is an open-source forecasting model designed for time-series data. It works by decomposing time series as a sum of three components: trend, seasonability and holiday effects. The model fits piecewise linear or logistic trends, captures seasonal patterns using a Fourier series, and uses indicator functions for customizable holiday events causing spikes or dips. To evaluate forecasting accuracy, Prophet supports rolling forward cross-validation where the model is repeatedly trained on an expanding window of historical data and then used to forecast a fixed horizon into the future.
+
+The Google Trends data in this project spans the years 2010-2024. We begin by plotting the data, we then use Prophet to fit the data and create a model to forecast one year into the future. 
 
 #### Natural Fabrics Trends
 
@@ -26,7 +27,7 @@ We can also break down the model results into its trend and seasonality componen
 
 ![](images/cotton_1yr_forecast_components.png)
 
-Visualy, the model output seems to match the data pretty well, which gives confidence in the forecast. But for educational purposes, we produce error estimates for the model output using its built-in cross validation tool.
+Visualy, the model output seems to match the data pretty well, which gives confidence in the forecast. But for educational purposes, we produce error estimates for the model output using its built-in **cross validation** tool.
 
 #### Prophet's cross validation
 
@@ -45,7 +46,15 @@ Then using Prophet's diagnostics module we produce a table of error metrics for 
 
 For each horizon month, we list the MAPE (Mean Absolute Percent Error), the RMSE (Root Mean Square Error) and the coverage. 
 The MAPE measures the average percentage difference between the predicted values and the actual values. Here we see that the MAPE range is between about 4-6%. The model also achieves an RMSE of 3–5 units on a 0–100 popularity scale, indicating that forecast errors typically fall within 3–5% of the total range. 
-The coverage column gives the proportion of actual values (y) that fall within the forecast uncertainty interval. We used the default prediction interval width (80%), which is designed to capture 80% of the actual values within the forecast range. However, the observed coverage ranged between 30% and 50%, indicating that only a small portion of the actual values fell within the model's predicted intervals. This underperformance suggests that the forecast intervals were too narrow, likely underestimating the true uncertainty in the data. As a result, the model was overconfident in its predictions, missing a significant portion of the actual outcomes. To improve coverage and better quantify forecast uncertainty, future iterations of the model should consider increasing the prediction interval width (e.g., to 90% or 95%) by adjusting the interval_width parameter during model initialization.
+The coverage column gives the proportion of actual values (y) that fall within the forecast uncertainty interval. The observed coverage ranged between 30% and 50%, indicating that only a small portion of the actual values fell within the model's predicted intervals. However, according to Prophet's documentation, the model detects and fits trend changes in the historical data, and *assumes* similar trend changes in the future. That is, Prophet assumes that the average frequency and magnitude of trend changes in the future will be the same as that observed in the history. By projecting trend changes forward and computing their distribution, uncertainty intervals are obtained. But because this assumption is probably not true, accurate coverage on the uncertainty intervals should not be expected. 
 
+------------------------------------------------------------------------------------------------------------------------------------
 
+We do not conduct in-depth analysis on time-series components or error analysis for the other items in the category. Instead, we simply proceed to the forecast visualizaiton for the remaining categories. 
 
+#### Trend and Forecast Homegoods Materials
+![](images/forecast_plot_all_hg_materials.png)
+
+#### Trend and Forecast Food/Drink Descriptions
+
+![](images/forecast_plot_all_fd_descriptions.png)
