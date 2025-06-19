@@ -50,11 +50,16 @@ The coverage column gives the proportion of actual values (y) that fall within t
 
 ------------------------------------------------------------------------------------------------------------------------------------
 
-We do not conduct in-depth analysis on time-series components or error analysis for the other items in the category. Instead, we simply proceed to the forecast visualizaiton for the remaining categories. 
+We do not conduct in-depth analysis on time-series components or error analysis for the other items in the category. Instead, we simply plot the time-series data and the modeled forecast for the remaining categories. 
 
-#### Trend and Forecast Homegoods Materials
-![](images/forecast_plot_all_hg_materials.png)
+#### Trend and Forecast Home Goods Materials   
 
-#### Trend and Forecast Food/Drink Descriptions
+![](images/food_drink_trend_plot.png)    
 
-![](images/forecast_plot_all_fd_descriptions.png)
+![](images/forecast_plot_all_hg_materials.png)    
+
+#### Trend and Forecast Food & Drink Descriptions   
+
+![](images/home_goods_trend_plot.png)
+
+![](images/forecast_plot_all_fd_descriptions.png)   
