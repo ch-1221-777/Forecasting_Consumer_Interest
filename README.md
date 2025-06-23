@@ -19,11 +19,11 @@ The Google Trends data in this project spans the years 2010-2024. We begin by pl
 
 #### Prophet's Output
 
-The following plot is the fitted time series (2010 - 2024) which includes the one-year forecast by extending the time series to the end of 2025/ beginning of 2026.
+The following plot is the fitted time series (2010 - 2024) and the one-year forecast (2024 to end 2025/ beginning of 2026).
 
 ![](images/forecast_plot_all_fabrics.png)
 
-We can also break down the model results into its trend and seasonality components. We do this for the first item in the Natural Fabrics category. That is, in the following figure we show the model output of "cotton" and it's trend component as well as it's yearly seasonality trend. 
+Prophet allows a break down of the model into its trend and seasonality components. We do this for the first item in the Natural Fabrics category. That is, in the following figure we show the model output of "cotton" and it's trend component as well as it's yearly seasonality trend. 
 
 ![](images/cotton_1yr_forecast_components.png)
 
@@ -63,3 +63,8 @@ We do not conduct in-depth analysis on time-series components or error analysis 
 ![](images/food_drink_trend_plot.png)    
 
 ![](images/forecast_plot_all_fd_descriptions.png)   
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+Remark:   
+Prophet uses by default a linear trend component to fit data. However, many real-world phenomena exhibit non-linear growth. Future work could explore Prophet's logistic growth model inthe trend component. Furthermore, to asses the value of Prophet, future work should compare its performance to e.g. ARIMA models.
